@@ -1,6 +1,6 @@
-import welcomeScreen from "./screens/welcomeScreen";
-import chatScreen from "./screens/chatScreen";
-import PageContext from "./Pagecontext";
+import welcomeScreen from "./screens/WelcomeScreen";
+import chatScreen from "./screens/ChatScreen";
+import PageContext from "./PageContext";
 import { useState } from "react";
 
 export default function App() {
