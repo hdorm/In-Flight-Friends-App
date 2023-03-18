@@ -4,7 +4,7 @@ import SelectDropdown from "react-native-select-dropdown";
 
 const emojis = ['Happy', 'Sad', 'Mad'];
 
-export default function welcomeScreen() {
+export default function WelcomeScreen() {
     return (
         <View style={styles.frontPage}>
             <Text style={styles.titleText}>Welcome</Text>

@@ -1,5 +1,5 @@
 
-function chatScreen() {
+function ChatScreen() {
     return(
         <View>
             <Text>Hi</Text>
@@ -7,4 +7,4 @@ function chatScreen() {
     );
 };
 
-export default chatScreen;
+export default ChatScreen;
