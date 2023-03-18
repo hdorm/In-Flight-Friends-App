@@ -28,7 +28,7 @@ const emojiImages = [
     {image: require('./images/zombie.png')}
 ]
 
-export default function welcomeScreen() {
+export default function WelcomeScreen() {
     return (
         <View style={styles.frontPage}>
             <Text style={styles.titleText}>Welcome</Text>
