@@ -1,7 +1,9 @@
-import {Alert, StyleSheet, Text, TouchableOpacity, View, Image} from "react-native";
+import {Alert, StyleSheet, Text, TouchableOpacity, View, Image, Button, Pressable } from "react-native";
 import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const emojiImages = [
     {image: require('../images/awesome.png')},
@@ -28,7 +30,7 @@ const emojiImages = [
     {image: require('../images/zombie.png')}
 ]
 
-function WelcomeScreen() {
+function WelcomeScreen( { navigation } ) {
     return (
         <View style={styles.frontPage}>
             <Text style={styles.titleText}>Welcome</Text>
@@ -63,13 +65,17 @@ function WelcomeScreen() {
                     );
                 }}
             />
-            <TouchableOpacity
+            {/* <TouchableOpacity
             //Implement the button functionality
                 style={styles.continueButton}
                 onPress={() => Alert.alert('Continue button pressed')}
                 underlayColor='white'>
                 <Text style={styles.continueButtonText}>Continue</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <Button
+            title="Continue"
+            onPress={() => navigation.navigate('Chat')}
+            />
         </View>
     );
 }
