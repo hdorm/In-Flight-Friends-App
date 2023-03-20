@@ -1,24 +1,23 @@
-import welcomeScreen from "./screens/WelcomeScreen";
-import chatScreen from "./screens/ChatScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
+import ChatScreen from "./screens/ChatScreen";
 import PageContext from "./PageContext";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from "react";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
 
-    const [showWelcome, setShowWelcome] = useState(true);
-    const [showChat, setShowChat] = useState(false);
+function App() {
 
     return (
-        <main>
-            <PageContext.Provider value={{
-                showWelcome,
-                showChat,
-            }}>
-                {showChat ? <chatScreen />
-                : <showWelcome />}
-            </PageContext.Provider>
-        </main>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={WelcomeScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
-};
+}
+
+export default App;
 
 

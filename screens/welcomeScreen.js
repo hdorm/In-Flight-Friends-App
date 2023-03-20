@@ -4,7 +4,7 @@ import SelectDropdown from "react-native-select-dropdown";
 
 const emojis = ['Happy', 'Sad', 'Mad'];
 
-export default function WelcomeScreen() {
+function WelcomeScreen() {
     return (
         <View style={styles.frontPage}>
             <Text style={styles.titleText}>Welcome</Text>
@@ -25,6 +25,7 @@ export default function WelcomeScreen() {
                 }}
             />
             <TouchableOpacity
+            //Implement the button functionality
                 style={styles.continueButton}
                 onPress={() => Alert.alert('Continue button pressed')}
                 underlayColor='white'>
@@ -72,3 +73,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 });
+
+export default WelcomeScreen;
