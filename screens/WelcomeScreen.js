@@ -4,6 +4,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ContinueButton from "../ContinueButton";
 
 const emojiImages = [
     {image: require('../images/awesome.png')},
@@ -72,7 +73,7 @@ function WelcomeScreen( { navigation } ) {
                 underlayColor='white'>
                 <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity> */}
-            <Button
+            <ContinueButton
             title="Continue"
             onPress={() => navigation.navigate('Chat')}
             />
@@ -123,19 +124,6 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30      ,
         resizeMode: 'center'
-    },
-    continueButton: {
-        backgroundColor: '#c62f4e',
-        borderRadius: 30,
-        width: 250,
-        height: 60,
-        justifyContent: 'center',
-        top: '60%'
-    },
-    continueButtonText: {
-        fontSize: 35,
-        color: 'white',
-        textAlign: 'center'
     }
 });
 
