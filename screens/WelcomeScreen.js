@@ -1,9 +1,7 @@
-import {Alert, StyleSheet, Text, TouchableOpacity, View, Image, Button, Pressable} from "react-native";
+import {StyleSheet, Text, View, Image} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ContinueButton from "../ContinueButton";
 
 // Creates an array that points to the emoji images
