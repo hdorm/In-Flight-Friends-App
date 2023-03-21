@@ -1,11 +1,12 @@
-import {Alert, StyleSheet, Text, TouchableOpacity, View, Image, Button, Pressable } from "react-native";
+import {Alert, StyleSheet, Text, TouchableOpacity, View, Image, Button, Pressable} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ContinueButton from "../ContinueButton";
 
+// Creates an array that points to the emoji images
 const emojiImages = [
     {image: require('../images/awesome.png')},
     {image: require('../images/beaver.png')},
@@ -31,7 +32,7 @@ const emojiImages = [
     {image: require('../images/zombie.png')}
 ]
 
-function WelcomeScreen( { navigation } ) {
+function WelcomeScreen({navigation}) {
     return (
         <View style={styles.frontPage}>
             <Text style={styles.titleText}>Welcome</Text>
@@ -42,6 +43,7 @@ function WelcomeScreen( { navigation } ) {
                 onSelect={(selectedItem, index) => {
                     console.log(selectedItem, index);
                 }}
+                disableAutoScroll={true}
                 buttonStyle={styles.dropdownButton}
                 renderCustomizedButtonChild={(selectedItem) => {
                     return (
@@ -57,6 +59,7 @@ function WelcomeScreen( { navigation } ) {
                 renderDropdownIcon={isOpened => {
                     return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#444'} size={18}/>;
                 }}
+                dropdownStyle={styles.dropdownButtonStyle}
                 rowStyle={styles.dropdownButtonRowStyle}
                 renderCustomizedRowChild={(item) => {
                     return (
@@ -74,9 +77,11 @@ function WelcomeScreen( { navigation } ) {
                 <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity> */}
             <ContinueButton
-            title="Continue"
-            onPress={() => navigation.navigate('Chat')}
+                title="Continue"
+                onPress={() => navigation.navigate('Chat')}
             />
+            <Text style={styles.footerText}> All emojis designed by OpenMoji – the open-source emoji and icon project.
+                License: CC BY-SA 4.0 </Text>
         </View>
     );
 }
@@ -103,10 +108,13 @@ const styles = StyleSheet.create({
         width: 100,
         height: 30,
         borderRadius: 15,
-        top: '68%'
+        top: '60%'
     },
     dropdownButtonChildStyle: {
         alignItems: 'center'
+    },
+    dropdownButtonStyle: {
+        borderRadius: 12
     },
     dropdownButtonImage: {
         width: 30,
@@ -122,8 +130,14 @@ const styles = StyleSheet.create({
     },
     dropdownButtonRowImage: {
         width: 30,
-        height: 30      ,
+        height: 30,
         resizeMode: 'center'
+    },
+    footerText: {
+        fontSize: 10,
+        textAlign: "center",
+        color: "white",
+        top: "67%"
     }
 });
 
