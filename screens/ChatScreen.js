@@ -21,12 +21,7 @@ const Chat = ({ navigation }) => {
                 <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => navigation.goBack()}>
                     <Text style={{ color: 'blue', fontSize: 18 }}>Back</Text>
                 </TouchableOpacity>
-            ),
-            headerRight: () => (
-                <TouchableOpacity style={{ marginRight: 10 }} onPress={signOutNow}>
-                    <Text style={{ color: 'white', fontSize: 18 }}>Logout</Text>
-                </TouchableOpacity>
-            ),
+            )
         });
     }, [navigation]);
 
@@ -34,7 +29,7 @@ const Chat = ({ navigation }) => {
         setMessages([
             {
                 _id: 1,
-                text: 'Hello',
+                text: 'Best wings in town?',
                 createdAt: new Date(),
                 user: {
                     _id: 2,
