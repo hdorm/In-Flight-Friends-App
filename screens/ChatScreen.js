@@ -1,20 +1,9 @@
 import React, { useEffect, useCallback, useState, useLayoutEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Avatar } from 'react-native-elements';
-import { auth, db } from '../firebase';
-import { signOut } from 'firebase/auth';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 const Chat = ({ navigation }) => {
     const [messages, setMessages] = useState([]);
-    const signOutNow = () => {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            navigation.replace('Login');
-        }).catch((error) => {
-            // An error happened.
-        });
-    }
     useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
@@ -50,9 +39,9 @@ const Chat = ({ navigation }) => {
             showAvatarForEveryMessage={true}
             onSend={messages => onSend(messages)}
             user={{
-                _id: auth?.currentUser?.email,
-                name: auth?.currentUser?.displayName,
-                avatar: auth?.currentUser?.photoURL
+                _id: 1,
+                name: "React Native",
+                avatar: "https://placeimg.com/140/140/any"
             }}
         />
     );
