@@ -38,6 +38,7 @@ const Chat = ({ navigation }) => {
             messages={messages}
             showAvatarForEveryMessage={true}
             onSend={messages => onSend(messages)}
+            //Temporary user
             user={{
                 _id: 1,
                 name: "React Native",
