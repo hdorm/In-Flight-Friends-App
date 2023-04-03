@@ -1,8 +1,10 @@
-import { getDatabase } from "firebase/database";
+import { getDatabase, set, ref } from "firebase/database";
 import firebase from 'firebase/app';
+import { getAuth } from "firebase/auth";
 
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app);
+const auth = getAuth(app);
 
 class Firebase{
   constructor() {
@@ -26,6 +28,15 @@ class Firebase{
   observeAuth = () => {
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
   }
+
+  writeUserData(userId, name, imageUrl) {
+    const db = getDatabase();
+    set(ref(db, 'users/' + userId), {
+      username: name,
+      profile_picture : imageUrl
+    });
+  }
+
 
   onAuthStateChanged = user => {
     if (!user) {

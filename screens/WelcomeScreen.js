@@ -3,6 +3,7 @@ import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Creates an array that points to the emoji images
 const emojiImages = [
