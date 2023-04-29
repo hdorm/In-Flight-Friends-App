@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState, useLayoutEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { writeToChatroom, getChatroomData, getUserId } from '../Firebase.js';
 
 const Chat = ({ navigation }) => {
     const [messages, setMessages] = useState([]);
@@ -15,23 +15,15 @@ const Chat = ({ navigation }) => {
         });
     }, [navigation]);
 
+    // Load messages from Firebase
     useEffect(() => {
-        setMessages([
-            {
-                _id: 1,
-                text: 'Best wings in town?',
-                createdAt: new Date(),
-                user: {
-                    _id: 2,
-                    name: 'React Native',
-                    avatar: require('../images/awesome.png'),
-                },
-            },
-        ]);
+        getChatroomData(messages);
     }, []);
 
+    // Send messages to Firebase
     const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
+        writeToChatroom(messages);
     }, []);
 
     return (
@@ -39,11 +31,9 @@ const Chat = ({ navigation }) => {
             messages={messages}
             showAvatarForEveryMessage={true}
             onSend={messages => onSend(messages)}
-            //Temporary user
+            //How can I get the user's id from Firebase?
             user={{
-                _id: 1,
-                name: "React Native",
-                avatar: "https://placeimg.com/140/140/any"
+                userId : 1,
             }}
         />
     );
