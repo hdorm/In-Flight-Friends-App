@@ -36,7 +36,7 @@ function WelcomeScreen({navigation}) {
 
     const [selectedEmoji, setSelectedEmoji] = useState(null);
 
-    const handleSelect = (selectedItem, index) => {
+    const handleSelect = (selectedItem) => {
         setSelectedEmoji(selectedItem);
     };
     

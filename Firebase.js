@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
+import React, { useState } from "react";
 
 const firebaseapp = {
   apiKey: "AIzaSyAGcjltu5V_JpqpedE2fS0KirY39xjMTmQ",
@@ -14,8 +15,9 @@ const firebaseapp = {
 
 const app = initializeApp(firebaseapp);
 
+var userId = Math.floor(Math.random() * 1000000000);
+
 function writeUserData(emoji) {
-  const userId = Math.floor(Math.random() * 1000000000);
   const database = getDatabase();
   const reference = ref(database, 'users/' + userId);
   set(reference, {
@@ -24,28 +26,35 @@ function writeUserData(emoji) {
   });
 }
 
-// Reference users collection
-// var usersDB = firebase.database().ref('users');
+function getUserId(){
+  const user = firebase.auth().currentUser;
+  return user.userId;
+}
 
-// // Listen for form submit
-// document.getElementById('ContinueButton_WelcomeScreen').addEventListener('continue', submitEmoji);
+function getUserEmoji() {
+  const database = getDatabase();
+  const reference = ref(database, 'users/user_emoji');
+  onValue(reference, (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+  });
+}
 
-// function submitEmoji(e){
-//   e.preventDefault();
+function writeToChatroom(message) {
+  const database = getDatabase();
+  const reference = ref(database, 'chatroom/');
+  set(reference, {
+    message: message
+  });
+}
 
-//   // Get values
-//   var emoji = getInputVal('ContinueButton_WelcomeScreen');
-  
-//   // Generate a unique ID for each user
-//   var newUserId = usersDB.push().key;
+function getChatroomData() {
+  const database = getDatabase();
+  const reference = ref(database, 'chatroom/');
+  onValue(reference, (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+  });
+}
 
-//   firebase.database().ref('users/' + newUserId).set({
-//     userId: newUserId,
-//     user_emoji: emoji
-//   });
-
-//   console.log(newUserId, emoji);
-
-// }
-
-export { firebaseapp, writeUserData };
+export { firebaseapp, writeUserData, getUserEmoji, writeToChatroom, getChatroomData, getUserId };
