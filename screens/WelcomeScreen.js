@@ -4,8 +4,7 @@ import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
-import { getDatabase, set, ref, push } from "firebase/database";
-import { firebaseapp, userId, writeUserData } from "../Firebase.js";
+import { writeUserData } from "../Firebase.js";
 
 // Creates an array that points to the emoji images
 const emojiImages = [
