@@ -1,92 +1,51 @@
-import { getDatabase, set, ref } from "firebase/database";
-import firebase from 'firebase/app';
-import { getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, set } from "firebase/database";
 
-// Initialize Realtime Database and get a reference to the service
-const database = getDatabase(app);
-const auth = getAuth(app);
+const firebaseapp = {
+  apiKey: "AIzaSyAGcjltu5V_JpqpedE2fS0KirY39xjMTmQ",
+  authDomain: "in-flight-friends-app.firebaseapp.com",
+  databaseURL: "https://in-flight-friends-app-default-rtdb.firebaseio.com",
+  projectId: "in-flight-friends-app",
+  storageBucket: "in-flight-friends-app.appspot.com",
+  messagingSenderId: "424633081193",
+  appId: "1:424633081193:web:8fc57f0f22662a26dd71f8",
+  measurementId: "G-RJPG26EM8M"
+};
 
-class Firebase{
-  constructor() {
-    this.init();
-    this.observeAuth();
-  }
+const app = initializeApp(firebaseapp);
 
-  init = () => {
-    Firebase.initializeApp({
-      apiKey: "AIzaSyAGcjltu5V_JpqpedE2fS0KirY39xjMTmQ",
-      authDomain: "in-flight-friends-app.firebaseapp.com",
-      projectId: "in-flight-friends-app",
-      databaseURL: "https://in-flight-friends-app-default-rtdb.firebaseio.com/",
-      storageBucket: "in-flight-friends-app.appspot.com",
-      messagingSenderId: "424633081193",
-      appId: "1:424633081193:web:8fc57f0f22662a26dd71f8",
-      measurementId: "G-RJPG26EM8M"    
-    });
-  }
-
-  observeAuth = () => {
-    firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
-  }
-
-  writeUserData(userId, name, imageUrl) {
-    const db = getDatabase();
-    set(ref(db, 'users/' + userId), {
-      username: name,
-      profile_picture : imageUrl
-    });
-  }
-
-
-  onAuthStateChanged = user => {
-    if (!user) {
-      try {
-        firebase.auth().signInAnonymously();
-      } catch ({ message }) {
-        alert(message);
-      }
-    }
-  }
-
-  get uid() {
-    return (firebase.auth().currentUser || {}).uid;
-  }
-
-  get ref() {
-    return firebase.database().ref('messages');
-  }
-
-  parse = snapshot => {
-    const { timestamp: numberStamp, text, user } = snapshot.val();
-    const { key: _id } = snapshot;
-    const timestamp = new Date(numberStamp);
-
-    const message = {
-      _id,
-      timestamp,
-      text,
-      user,
-    };
-    return message;
-  }
-
-  on = callback => {
-    this.ref
-      .limitToLast(20)
-      .on('child_added', snapshot => callback(this.parse(snapshot)));
-  }
-
-  get timestamp() {
-    return firebase.database.ServerValue.TIMESTAMP;
-  }
-
-  append = message => this.ref.push(message);
-
-  off() {
-    this.ref.off();
-  }
-
+function writeUserData(emoji) {
+  const userId = Math.floor(Math.random() * 1000000000);
+  const database = getDatabase();
+  const reference = ref(database, 'users/' + userId);
+  set(reference, {
+      userId: userId,
+      user_emoji: emoji
+  });
 }
 
-Firebase.shared = new Firebase();
-export default Firebase;
+// Reference users collection
+// var usersDB = firebase.database().ref('users');
+
+// // Listen for form submit
+// document.getElementById('ContinueButton_WelcomeScreen').addEventListener('continue', submitEmoji);
+
+// function submitEmoji(e){
+//   e.preventDefault();
+
+//   // Get values
+//   var emoji = getInputVal('ContinueButton_WelcomeScreen');
+  
+//   // Generate a unique ID for each user
+//   var newUserId = usersDB.push().key;
+
+//   firebase.database().ref('users/' + newUserId).set({
+//     userId: newUserId,
+//     user_emoji: emoji
+//   });
+
+//   console.log(newUserId, emoji);
+
+// }
+
+export { firebaseapp, writeUserData };

@@ -1,0 +1,2 @@
+
+// export { firebaseapp, database };

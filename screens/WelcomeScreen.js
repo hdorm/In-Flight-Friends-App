@@ -1,9 +1,11 @@
 import {StyleSheet, Text, View, Image} from "react-native";
+import React, { useState } from "react";
 import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, set, ref, push } from "firebase/database";
+import { firebaseapp, userId, writeUserData } from "../Firebase.js";
 
 // Creates an array that points to the emoji images
 const emojiImages = [
@@ -32,6 +34,18 @@ const emojiImages = [
 ]
 
 function WelcomeScreen({navigation}) {
+
+    const [selectedEmoji, setSelectedEmoji] = useState(null);
+
+    const handleSelect = (selectedItem, index) => {
+        setSelectedEmoji(selectedItem);
+    };
+    
+    const handleContinue = () => {
+        writeUserData(selectedEmoji);
+        navigation.navigate('Chat');
+    };
+
     return (
         <View style={styles.frontPage}>
             <Text style={styles.titleText}>Welcome</Text>
@@ -39,9 +53,7 @@ function WelcomeScreen({navigation}) {
             <StatusBar style="auto"/>
             <SelectDropdown
                 data={emojiImages}
-                onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index);
-                }}
+                onSelect={handleSelect}
                 disableAutoScroll={true}
                 buttonStyle={styles.dropdownButton}
                 renderCustomizedButtonChild={(selectedItem) => {
@@ -68,16 +80,10 @@ function WelcomeScreen({navigation}) {
                     );
                 }}
             />
-            {/* <TouchableOpacity
-            //Implement the button functionality
-                style={styles.continueButton}
-                onPress={() => Alert.alert('Continue button pressed')}
-                underlayColor='white'>
-                <Text style={styles.continueButtonText}>Continue</Text>
-            </TouchableOpacity> */}
             <ContinueButton
                 title="Continue"
-                onPress={() => navigation.navigate('Chat')}
+                id="ContinueButton_WelcomeScreen"
+                onPress={handleContinue}
             />
             <Text style={styles.footerText}> All emojis designed by OpenMoji – the open-source emoji and icon project.
                 License: CC BY-SA 4.0 </Text>
