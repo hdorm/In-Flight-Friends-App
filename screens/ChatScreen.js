@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState, useLayoutEffect } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-import { writeToChatroom, getChatroomData, getUserId } from '../Firebase.js';
+import { writeToChatroom, getChatroomData, getUserId, getUserAvatar } from '../Firebase.js';
 
 const Chat = ({ navigation }) => {
     const [messages, setMessages] = useState([]);
