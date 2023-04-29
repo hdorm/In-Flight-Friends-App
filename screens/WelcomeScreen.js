@@ -5,7 +5,6 @@ import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
 import { writeUserData } from "../Firebase.js";
-import {useState} from "react";
 
 // Creates an array that points to the emoji images
 const emojiImages = [
