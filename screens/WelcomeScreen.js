@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View, Image} from "react-native";
+import {StyleSheet, Text, View, Image, Modal, Pressable} from "react-native";
 import React, { useState } from "react";
 import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
 import { writeUserData } from "../Firebase.js";
+import {useState} from "react";
 
 // Creates an array that points to the emoji images
 const emojiImages = [
@@ -44,9 +45,30 @@ function WelcomeScreen({navigation}) {
         writeUserData(selectedEmoji);
         navigation.navigate('Chat');
     };
-
+    
+    const [modalVisible, setModalVisible] = useState(true);
+    
     return (
         <View style={styles.frontPage}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalTitleText}>Terms of Service</Text>
+                    <Text style={styles.modalText}>1. No swearing or harmful language</Text>
+                    <Text style={styles.modalText}>2. Do not reveal personal info</Text>
+                    <Text style={styles.modalText}>3. Do not attempt to hack the app</Text>
+                    <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={styles.textStyle}>Agree</Text>
+                    </Pressable>
+                </View>
+            </Modal>
             <Text style={styles.titleText}>Welcome</Text>
             <Text style={styles.selectText}>Select an emoji</Text>
             <StatusBar style="auto"/>
@@ -91,6 +113,49 @@ function WelcomeScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+    modalView: {
+        marginTop: 275,
+        margin: 35,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 55,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        marginBottom: -35,
+        borderRadius: 30,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonClose: {
+        backgroundColor: '#c62f4e',
+    },
+    textStyle: {
+        fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
+    },
+    modalTitleText: {
+        fontSize: 20,
+        textDecorationLine: 'underline',
+        marginTop: -35,
+        marginBottom: 15,
+        fontWeight: "bold",
+        textAlign: 'center',
+    },
+    modalText: {
+        fontSize: 15,
+        marginBottom: 15,
+        textAlign: 'center',
+    },
     frontPage: {
         flex: 1,
         backgroundColor: '#003268',
