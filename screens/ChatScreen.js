@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState, useLayoutEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Chat = ({ navigation }) => {
     const [messages, setMessages] = useState([]);

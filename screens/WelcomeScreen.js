@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View, Image, Modal, Pressable} from "react-native";
+import React, { useState } from "react";
 import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
+import { writeUserData } from "../Firebase.js";
 import {useState} from "react";
 
 // Creates an array that points to the emoji images
@@ -32,7 +34,20 @@ const emojiImages = [
 ]
 
 function WelcomeScreen({navigation}) {
+
+    const [selectedEmoji, setSelectedEmoji] = useState(null);
+
+    const handleSelect = (selectedItem, index) => {
+        setSelectedEmoji(selectedItem);
+    };
+    
+    const handleContinue = () => {
+        writeUserData(selectedEmoji);
+        navigation.navigate('Chat');
+    };
+    
     const [modalVisible, setModalVisible] = useState(true);
+    
     return (
         <View style={styles.frontPage}>
             <Modal
@@ -59,9 +74,7 @@ function WelcomeScreen({navigation}) {
             <StatusBar style="auto"/>
             <SelectDropdown
                 data={emojiImages}
-                onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index);
-                }}
+                onSelect={handleSelect}
                 disableAutoScroll={true}
                 buttonStyle={styles.dropdownButton}
                 renderCustomizedButtonChild={(selectedItem) => {
@@ -90,7 +103,8 @@ function WelcomeScreen({navigation}) {
             />
             <ContinueButton
                 title="Continue"
-                onPress={() => navigation.navigate('Chat')}
+                id="ContinueButton_WelcomeScreen"
+                onPress={handleContinue}
             />
             <Text style={styles.footerText}> All emojis designed by OpenMoji – the open-source emoji and icon project.
                 License: CC BY-SA 4.0 </Text>
