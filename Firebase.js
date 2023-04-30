@@ -17,12 +17,12 @@ const app = initializeApp(firebaseapp);
 
 var userId = Math.floor(Math.random() * 1000000000);
 
-function writeUserData(emoji) {
+function writeUserData(avatar) {
   const database = getDatabase();
   const reference = ref(database, 'users/' + userId);
   set(reference, {
       userId: userId,
-      user_emoji: emoji
+      user_avatar: avatar
   });
 }
 
@@ -31,9 +31,9 @@ function getUserId(){
   return user.userId;
 }
 
-function getUserEmoji() {
+function getUserAvatar() {
   const database = getDatabase();
-  const reference = ref(database, 'users/user_emoji');
+  const reference = ref(database, 'users/user_avatar');
   onValue(reference, (snapshot) => {
     const data = snapshot.val();
     console.log(data);
@@ -57,4 +57,4 @@ function getChatroomData() {
   });
 }
 
-export { firebaseapp, writeUserData, getUserEmoji, writeToChatroom, getChatroomData, getUserId };
+export { firebaseapp, writeUserData, getUserAvatar, writeToChatroom, getChatroomData, getUserId };

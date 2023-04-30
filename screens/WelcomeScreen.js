@@ -6,8 +6,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
 import { writeUserData } from "../Firebase.js";
 
-// Creates an array that points to the emoji images
-const emojiImages = [
+// Creates an array that points to the avatar images
+const avatarImages = [
     {image: require('../images/awesome.png')},
     {image: require('../images/beaver.png')},
     {image: require('../images/chipmunk.png')},
@@ -34,14 +34,14 @@ const emojiImages = [
 
 function WelcomeScreen({navigation}) {
 
-    const [selectedEmoji, setSelectedEmoji] = useState(null);
+    const [selectedAvatar, setSelectedAvatar] = useState(null);
 
     const handleSelect = (selectedItem) => {
-        setSelectedEmoji(selectedItem);
+        setSelectedAvatar(selectedItem);
     };
     
     const handleContinue = () => {
-        writeUserData(selectedEmoji);
+        writeUserData(selectedAvatar);
         navigation.navigate('Chat');
     };
     
@@ -69,10 +69,10 @@ function WelcomeScreen({navigation}) {
                 </View>
             </Modal>
             <Text style={styles.titleText}>Welcome</Text>
-            <Text style={styles.selectText}>Select an emoji</Text>
+            <Text style={styles.selectText}>Select an avatar</Text>
             <StatusBar style="auto"/>
             <SelectDropdown
-                data={emojiImages}
+                data={avatarImages}
                 onSelect={handleSelect}
                 disableAutoScroll={true}
                 buttonStyle={styles.dropdownButton}
@@ -105,7 +105,7 @@ function WelcomeScreen({navigation}) {
                 id="ContinueButton_WelcomeScreen"
                 onPress={handleContinue}
             />
-            <Text style={styles.footerText}> All emojis designed by OpenMoji – the open-source emoji and icon project.
+            <Text style={styles.footerText}> All avatars designed by OpenMoji – the open-source avatar and icon project.
                 License: CC BY-SA 4.0 </Text>
         </View>
     );
