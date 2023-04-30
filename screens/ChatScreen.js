@@ -18,6 +18,23 @@ const Chat = ({ navigation }) => {
         });
     }, [navigation]);
 
+    useEffect(() => {
+        setMessages([
+            {
+                _id: 1,
+                text: 'Best wings in town?',
+                createdAt: new Date(),
+                user: {
+                    _id: 2,
+                    name: 'John',
+                    avatar: require('../images/awesome.png'),
+                },
+            },
+        ]);
+    }, []);
+
+
+
     // Load messages from Firebase
     useEffect(() => {
         getChatroomData(messages);
@@ -37,7 +54,8 @@ const Chat = ({ navigation }) => {
             showUserAvatar={true}
             onSend={messages => onSend(messages)}
             user={{
-                _id : getUserId(),
+                userId : getUserId(),
+                avatar: require('../images/cold.png'),
             }}
         />
         </View>
