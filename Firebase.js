@@ -27,8 +27,7 @@ function writeUserData(avatar) {
 }
 
 function getUserId(){
-  const user = firebase.auth().currentUser;
-  return user.userId;
+  return userId;
 }
 
 function getUserAvatar() {

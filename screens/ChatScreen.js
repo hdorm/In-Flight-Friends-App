@@ -31,9 +31,8 @@ const Chat = ({ navigation }) => {
             messages={messages}
             showAvatarForEveryMessage={true}
             onSend={messages => onSend(messages)}
-            //How can I get the user's id from Firebase?
             user={{
-                userId : 1,
+                userId : getUserId(),
             }}
         />
     );
