@@ -37,7 +37,7 @@ const Chat = ({ navigation }) => {
             showUserAvatar={true}
             onSend={messages => onSend(messages)}
             user={{
-                userId : getUserId(),
+                _id : getUserId(),
             }}
         />
         </View>
