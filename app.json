@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "InFlightFriends",
-    "slug": "InFlightFriends",
+    "name": "In-flight Friends",
+    "slug": "in-flight-friends-slug",
     "version": "1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,17 +11,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.seniorproject.inflightfriends",
+      "buildNumber": "1.0"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+      "package": "com.seniorproject.inflightfriends",
+      "versionCode": 1
     }
   }
 }
