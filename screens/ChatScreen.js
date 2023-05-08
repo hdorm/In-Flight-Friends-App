@@ -1,3 +1,4 @@
+//Necessary Imports
 import React, { useEffect, useCallback, useState, useLayoutEffect } from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -33,8 +34,6 @@ const Chat = ({ navigation }) => {
         ]);
     }, []);
 
-
-
     // Load messages from Firebase
     useEffect(() => {
         getChatroomData(messages);
@@ -54,8 +53,8 @@ const Chat = ({ navigation }) => {
             showUserAvatar={true}
             onSend={messages => onSend(messages)}
             user={{
-                userId : getUserId(),
-                avatar: require('../images/cold.png'),
+                _id : getUserId(),
+                avatar: getUserAvatar()
             }}
         />
         </View>

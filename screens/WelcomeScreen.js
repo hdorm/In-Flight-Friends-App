@@ -1,3 +1,4 @@
+//Necessary Imports
 import {StyleSheet, Text, View, Image, Modal, Pressable} from "react-native";
 import React, { useState } from "react";
 import {StatusBar} from "expo-status-bar";
@@ -32,21 +33,24 @@ const avatarImages = [
     {image: require('../images/zombie.png')}
 ]
 
+// Function that contains all the elements and functions of the welcome screen
 function WelcomeScreen({navigation}) {
 
-    const [selectedAvatar, setSelectedAvatar] = useState(null);
-
+    // Gets called when a user selects an emoji and writes the selected emoji to the database
     const handleSelect = (selectedItem) => {
-        setSelectedAvatar(selectedItem);
+        // Calls function from Firebase.js which stores the user's avatar
+        writeUserData(avatarImages[avatarImages.indexOf(selectedItem)].image);
     };
-    
+
+    // Gets called when the user presses the continue button and adds the chat screen to the stack and displays it
     const handleContinue = () => {
-        writeUserData(selectedAvatar);
         navigation.navigate('Chat');
     };
-    
+
+    // Creates const to hold the current state of the modal displaying the terms of service
     const [modalVisible, setModalVisible] = useState(true);
-    
+
+    // Return statement which holds all the elements of the welcome screen
     return (
         <View style={styles.frontPage}>
             <Modal
@@ -111,6 +115,7 @@ function WelcomeScreen({navigation}) {
     );
 }
 
+// Styles for all the elements which needs to have changes made to them
 const styles = StyleSheet.create({
     modalView: {
         marginTop: 275,
@@ -209,4 +214,5 @@ const styles = StyleSheet.create({
     }
 });
 
+// Exports the welcome screen for use
 export default WelcomeScreen;

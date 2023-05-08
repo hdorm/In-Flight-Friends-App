@@ -1,7 +1,9 @@
+//Necessary Imports
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set, onValue } from "firebase/database";
-import React, { useState } from "react";
+import React from "react";
 
+// Const to hold information about the app and Firebase database
 const firebaseapp = {
   apiKey: "AIzaSyAGcjltu5V_JpqpedE2fS0KirY39xjMTmQ",
   authDomain: "in-flight-friends-app.firebaseapp.com",
@@ -13,40 +15,32 @@ const firebaseapp = {
   measurementId: "G-RJPG26EM8M"
 };
 
-const app = initializeApp(firebaseapp);
+// Creates a Firebase instance for the current chat session
+initializeApp(firebaseapp);
 
-var userId = Math.floor(Math.random() * 1000000000);
+// Creates a new user ID
+const userId = Math.floor(Math.random() * 1000000000);
 
+// Variable to store the user's avatar
+let user_avatar;
+
+// Gets called on the welcome screen when the user selects an avatar to store their selection
 function writeUserData(avatar) {
-  const database = getDatabase();
-  const reference = ref(database, 'users/' + userId);
-  set(reference, {
-      userId: userId,
-      user_avatar: avatar
-  });
+  user_avatar = avatar;
 }
 
-function getUserId(){
-  return userId;
-}
-
-function getUserAvatar() {
-  const database = getDatabase();
-  const reference = ref(database, 'users/user_avatar');
-  onValue(reference, (snapshot) => {
-    const data = snapshot.val();
-    console.log(data);
-  });
-}
-
+// Gets called when a user sends a chat and stores their message content and information
 function writeToChatroom(message) {
   const database = getDatabase();
   const reference = ref(database, 'chatroom/');
   set(reference, {
     message: message
+  }).then(() => {
+    console.log(message)
   });
 }
 
+// Retrieves information already sent in the current chat room
 function getChatroomData() {
   const database = getDatabase();
   const reference = ref(database, 'chatroom/');
@@ -56,4 +50,15 @@ function getChatroomData() {
   });
 }
 
+// Returns the user's ID when called
+function getUserId(){
+  return userId;
+}
+
+// Returns the user's avatar when called
+function getUserAvatar(){
+  return user_avatar;
+}
+
+// Exports the Firebase.js for use
 export { firebaseapp, writeUserData, getUserAvatar, writeToChatroom, getChatroomData, getUserId };
