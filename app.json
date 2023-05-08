@@ -18,6 +18,11 @@
     "android": {
       "package": "com.seniorproject.inflightfriends",
       "versionCode": 1
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f778fb7c-fb37-46b3-ac9f-c2069ceb26a7"
+      }
     }
   }
 }
