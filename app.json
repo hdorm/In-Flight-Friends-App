@@ -2,7 +2,7 @@
   "expo": {
     "name": "In-flight Friends",
     "slug": "in-flight-friends-slug",
-    "version": "1.0",
+    "version": "1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -13,11 +13,11 @@
     },
     "ios": {
       "bundleIdentifier": "com.seniorproject.inflightfriends",
-      "buildNumber": "1.0"
+      "buildNumber": "1.1"
     },
     "android": {
       "package": "com.seniorproject.inflightfriends",
-      "versionCode": 1
+      "versionCode": 2
     },
     "extra": {
       "eas": {
