@@ -1,11 +1,11 @@
 //Necessary Imports
 import {StyleSheet, Text, View, Image, Modal, Pressable} from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {StatusBar} from "expo-status-bar";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
-import { writeUserData } from "../Firebase.js";
+import {writeUserData} from "../Firebase.js";
 
 // Creates an array that points to the avatar images
 const avatarImages = [
