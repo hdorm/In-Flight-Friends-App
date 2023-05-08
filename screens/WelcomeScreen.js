@@ -30,7 +30,19 @@ const avatarImages = [
     {image: require('../images/vampire.png')},
     {image: require('../images/wizard.png')},
     {image: require('../images/woozy.png')},
-    {image: require('../images/zombie.png')}
+    {image: require('../images/zombie.png')},
+    {image: require('../images/game.png')},
+    {image: require('../images/eightball.png')},
+    {image: require('../images/floppydisk.png')},
+    {image: require('../images/coolsquare.png')},
+    {image: require('../images/globe.png')},
+    {image: require('../images/pepper.png')},
+    {image: require('../images/bluewhale.png')},
+    {image: require('../images/crab.png')},
+    {image: require('../images/snowman.png')},
+    {image: require('../images/yinyang.png')},
+    {image: require('../images/radioactive.png')},
+    {image: require('../images/killerwhale.png')}
 ]
 
 // Function that contains all the elements and functions of the welcome screen
