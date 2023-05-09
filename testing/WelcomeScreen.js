@@ -6,6 +6,36 @@ import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ContinueButton from "../ContinueButton";
 import {writeUserData} from "../Firebase.js";
+import NetInfo from '@react-native-community/netinfo';
+import * as Location from 'expo-location';
+// import * as Network from "expo-network";
+// import {NetworkStateType} from "expo-network";
+
+// Works for retrieving whether the user is connected to Wi-Fi, but will not display
+// the network's SSID or any other pertinent information
+Location.requestForegroundPermissionsAsync().then(async () => {
+    await NetInfo.configure({
+        shouldFetchWiFiSSID: true,
+    });
+    await NetInfo.refresh();
+    const networkInfo = await NetInfo.fetch();
+    console.log('Connection type:', networkInfo.type);
+    console.log('Connected:', networkInfo.isConnected);
+    if (networkInfo.type === 'wifi') {
+        console.log('WiFi name:', networkInfo.details.ssid)
+        console.log('WiFi BSSID:', networkInfo.details.bssid)
+        console.log('WiFi subnet:', networkInfo.details.subnet)
+        console.log('WiFi IP address:', networkInfo.details.ipAddress)
+    }
+})
+
+/*
+// Alternative approach to getting network information that also does not work
+Network.getNetworkStateAsync = async function () {
+    console.log(NetworkStateType.WIFI)
+};
+await Network.getNetworkStateAsync();
+*/
 
 // Creates an array that points to the avatar images
 const avatarImages = [
