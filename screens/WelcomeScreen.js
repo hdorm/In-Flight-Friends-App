@@ -48,19 +48,27 @@ const avatarImages = [
 // Function that contains all the elements and functions of the welcome screen
 function WelcomeScreen({navigation}) {
 
+    let emojiSelected = false;
+
     // Gets called when a user selects an emoji and writes the selected emoji to the database
     const handleSelect = (selectedItem) => {
         // Calls function from Firebase.js which stores the user's avatar
+        emojiSelected = true;
         writeUserData(avatarImages[avatarImages.indexOf(selectedItem)].image);
     };
 
     // Gets called when the user presses the continue button and adds the chat screen to the stack and displays it
     const handleContinue = () => {
-        navigation.navigate('Chat');
+        if (emojiSelected) {
+            navigation.navigate('Chat');
+        } else if (!emojiSelected) {
+            setModalErrorVisible(!modalErrorVisible);
+        }
     };
 
     // Creates const to hold the current state of the modal displaying the terms of service
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalTermsVisible, setModalTermsVisible] = useState(true);
+    const [modalErrorVisible, setModalErrorVisible] = useState(false);
 
     // Return statement which holds all the elements of the welcome screen
     return (
@@ -68,9 +76,9 @@ function WelcomeScreen({navigation}) {
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}
+                visible={modalTermsVisible}
                 onRequestClose={() => {
-                    setModalVisible(!modalVisible);
+                    setModalTermsVisible(!modalTermsVisible);
                 }}>
                 <View style={styles.modalView}>
                     <Text style={styles.modalTitleText}>Terms of Service</Text>
@@ -79,8 +87,24 @@ function WelcomeScreen({navigation}) {
                     <Text style={styles.modalText}>3. Do not attempt to hack the app</Text>
                     <Pressable
                         style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}>
+                        onPress={() => setModalTermsVisible(!modalTermsVisible)}>
                         <Text style={styles.textStyle}>Agree</Text>
+                    </Pressable>
+                </View>
+            </Modal>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalErrorVisible}
+                onRequestClose={() => {
+                    setModalErrorVisible(!modalErrorVisible);
+                }}>
+                <View style={styles.modalErrorView}>
+                    <Text style={styles.modalErrorText}>Please select an emoji before pressing continue</Text>
+                    <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalErrorVisible(!modalErrorVisible)}>
+                        <Text style={styles.textStyle}>Dismiss</Text>
                     </Pressable>
                 </View>
             </Modal>
@@ -170,6 +194,27 @@ const styles = StyleSheet.create({
     modalText: {
         fontSize: 15,
         marginBottom: 15,
+        textAlign: 'center',
+    },
+    modalErrorView: {
+        marginTop: 280,
+        margin: 35,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 60,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalErrorText: {
+        fontSize: 16,
+        marginBottom: 20,
         textAlign: 'center',
     },
     frontPage: {
